@@ -3,12 +3,13 @@ version: '3.7'
 services:
   server:
     build: server
+    container_name: CUPhotoContest_Server
     environment:
       - PORT=3000
   
   proxy:
     image: nginx:stable-alpine
-    container_name: proxy 
+    container_name: CUPhotoContest_Proxy
     ports:
       - "8080:8080"
     volumes:
