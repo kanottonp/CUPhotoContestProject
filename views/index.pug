@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= "CU Photo Contest"
+  p Welcome to #{title}
+
+  form(action="/beginvote",method='POST')
+    button(type="submit") Next

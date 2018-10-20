@@ -1,0 +1,109 @@
+extends layout
+
+block content
+  h1= "CU Photo Contest Result"
+  p from total votes #{totalVotes}
+  p #{firstTitle}
+    |
+    br
+    |
+    a 1st Place is Photo Number #{firstContestFirstPlaceIndex}
+      |  
+      a with score #{firstContestFirstPlaceScore} 
+      |  
+      br
+    a 2nd Place is Photo Number #{firstContestSecondPlaceIndex}
+      |  
+      a with score #{firstContestSecondPlaceScore} 
+      |  
+      br
+    a 3rd Place is Photo Number #{firstContestThirdPlaceIndex}
+      |  
+      a with score #{firstContestThirdPlaceScore} 
+      |  
+      br
+      br
+  p #{secondTitle}
+    |
+    br
+    |
+    a 1st Place is Photo Number #{secondContestFirstPlaceIndex}
+      |  
+      a with score #{secondContestFirstPlaceScore} 
+      |  
+      br
+    a 2nd Place is Photo Number #{secondContestSecondPlaceIndex}
+      |  
+      a with score #{secondContestSecondPlaceScore} 
+      |  
+      br
+    a 3rd Place is Photo Number #{secondContestThirdPlaceIndex}
+      |  
+      a with score #{secondContestThirdPlaceScore} 
+      |  
+      br
+      br
+  p #{thirdTitle}
+    |
+    br
+    |
+    a 1st Place is Photo Number #{thirdContestFirstPlaceIndex}
+      |  
+      a with score #{thirdContestFirstPlaceScore} 
+      |  
+      br
+    a 2nd Place is Photo Number #{thirdContestSecondPlaceIndex}
+      |  
+      a with score #{thirdContestSecondPlaceScore} 
+      |  
+      br
+    a 3rd Place is Photo Number #{thirdContestThirdPlaceIndex}
+      |  
+      a with score #{thirdContestThirdPlaceScore} 
+      |  
+      br
+      br
+  p #{forthTitle}
+    |
+    br
+    |
+    a 1st Place is Photo Number #{forthContestFirstPlaceIndex}
+      |  
+      a with score #{forthContestFirstPlaceScore} 
+      |  
+      br
+    a 2nd Place is Photo Number #{forthContestSecondPlaceIndex}
+      |  
+      a with score #{forthContestSecondPlaceScore} 
+      |  
+      br
+    a 3rd Place is Photo Number #{forthContestThirdPlaceIndex}
+      |  
+      a with score #{forthContestThirdPlaceScore} 
+      |  
+      br
+      br
+  p #{fifthTitle}
+    |
+    br
+    |
+    a 1st Place is Photo Number #{fifthContestFirstPlaceIndex}
+      |  
+      a with score #{fifthContestFirstPlaceScore} 
+      |  
+      br
+    a 2nd Place is Photo Number #{fifthContestSecondPlaceIndex}
+      |  
+      a with score #{fifthContestSecondPlaceScore} 
+      |  
+      br
+    a 3rd Place is Photo Number #{fifthContestThirdPlaceIndex}
+      |  
+      a with score #{fifthContestThirdPlaceScore} 
+      |  
+      br
+      br
+  
+
+  form(action="/",method='GET')
+    button(type="submit") Back to Homepage

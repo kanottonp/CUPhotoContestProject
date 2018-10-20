@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= "CU Photo Contest"
+  p Welcome to #{title}
+
+  form(action="/vote5" method="POST")
+    a อันดับที่ 1
+      |  
+      input(type='number', name='firstPlace', value='')
+      br
+      br
+    a อันดับที่ 2
+      |  
+      input(type='number', name='secondPlace', value='')
+      br
+      br
+    a อันดับที่ 3
+      |  
+      input(type='number', name='thirdPlace', value='')
+      br
+      br
+
+    button.btn.btn-primary(type='submit') Next
