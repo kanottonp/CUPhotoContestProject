@@ -3,11 +3,11 @@ var router = express.Router();
 
 var find = require('../public/javascripts/findTopTenInArray')
 
-var firstContest = Array.apply(null, Array(60)).map(Number.prototype.valueOf, 0);
-var secondContest = Array.apply(null, Array(60)).map(Number.prototype.valueOf, 0);
-var thirdContest = Array.apply(null, Array(60)).map(Number.prototype.valueOf, 0);
-var forthContest = Array.apply(null, Array(60)).map(Number.prototype.valueOf, 0);
-var fifthContest = Array.apply(null, Array(60)).map(Number.prototype.valueOf, 0);
+var firstContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
+var secondContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
+var thirdContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
+var forthContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
+var fifthContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
 var totalVotes = 0
 
 /* GET home page. */
