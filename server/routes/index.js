@@ -78,7 +78,8 @@ router.get('/score', (req, res, next) => {
 router.post('/beginvote', function(req, res, next) {
     totalVotes += 1
     res.render('vote1', {
-        title: 'vote1'
+        title: 'vote1',
+        message: ''
     });
 });
 
@@ -86,86 +87,136 @@ router.post('/beginvote', function(req, res, next) {
 
 router.post('/vote1', function(req, res, next) {
 
-    var firstPlace = req.body.firstPlace
-    var secondPlace = req.body.secondPlace
-    var thirdPlace = req.body.thirdPlace
+    if (req.body.firstPlace == req.body.secondPlace ||
+        req.body.firstPlace == req.body.thirdPlace ||
+        req.body.secondPlace == req.body.thirdPlace) {
+        res.render('vote1', {
+            title: 'vote1',
+            message: 'Do not do the double vote for the same picture. Please vote again.'
+        });
+    } else {
+        var firstPlace = req.body.firstPlace
+        var secondPlace = req.body.secondPlace
+        var thirdPlace = req.body.thirdPlace
 
-    firstContest[firstPlace] += 3
-    firstContest[secondPlace] += 2
-    firstContest[thirdPlace] += 1
+        firstContest[firstPlace] += 3
+        firstContest[secondPlace] += 2
+        firstContest[thirdPlace] += 1
 
-    // console.log(firstContest)
-    res.render('vote2', {
-        title: 'vote2'
-    });
+        // console.log(firstContest)
+        res.render('vote2', {
+            title: 'vote2',
+            message: ''
+        });
+    }
+
 });
 
 
 router.post('/vote2', function(req, res, next) {
 
-    var firstPlace = req.body.firstPlace
-    var secondPlace = req.body.secondPlace
-    var thirdPlace = req.body.thirdPlace
+    if (req.body.firstPlace == req.body.secondPlace ||
+        req.body.firstPlace == req.body.thirdPlace ||
+        req.body.secondPlace == req.body.thirdPlace) {
+        res.render('vote2', {
+            title: 'vote2',
+            message: 'Do not do the double vote for the same picture. Please vote again.'
+        });
+    } else {
+        var firstPlace = req.body.firstPlace
+        var secondPlace = req.body.secondPlace
+        var thirdPlace = req.body.thirdPlace
 
-    secondContest[firstPlace] += 3
-    secondContest[secondPlace] += 2
-    secondContest[thirdPlace] += 1
+        secondContest[firstPlace] += 3
+        secondContest[secondPlace] += 2
+        secondContest[thirdPlace] += 1
 
-    // console.log(secondContest)
-    res.render('vote3', {
-        title: 'vote3'
-    });
+        // console.log(secondContest)
+        res.render('vote3', {
+            title: 'vote3',
+            message: ''
+        });
+    }
 
 });
 
 router.post('/vote3', function(req, res, next) {
 
-    var firstPlace = req.body.firstPlace
-    var secondPlace = req.body.secondPlace
-    var thirdPlace = req.body.thirdPlace
+    if (req.body.firstPlace == req.body.secondPlace ||
+        req.body.firstPlace == req.body.thirdPlace ||
+        req.body.secondPlace == req.body.thirdPlace) {
+        res.render('vote3', {
+            title: 'vote3',
+            message: 'Do not do the double vote for the same picture. Please vote again.'
+        });
+    } else {
+        var firstPlace = req.body.firstPlace
+        var secondPlace = req.body.secondPlace
+        var thirdPlace = req.body.thirdPlace
 
-    thirdContest[firstPlace] += 3
-    thirdContest[secondPlace] += 2
-    thirdContest[thirdPlace] += 1
+        thirdContest[firstPlace] += 3
+        thirdContest[secondPlace] += 2
+        thirdContest[thirdPlace] += 1
 
-    // console.log(thirdContest)
-    res.render('vote4', {
-        title: 'vote4'
-    });
+        // console.log(thirdContest)
+        res.render('vote4', {
+            title: 'vote4',
+            message: ''
+        });
+    }
 });
 
 
 router.post('/vote4', function(req, res, next) {
 
-    var firstPlace = req.body.firstPlace
-    var secondPlace = req.body.secondPlace
-    var thirdPlace = req.body.thirdPlace
+    if (req.body.firstPlace == req.body.secondPlace ||
+        req.body.firstPlace == req.body.thirdPlace ||
+        req.body.secondPlace == req.body.thirdPlace) {
+        res.render('vote4', {
+            title: 'vote4',
+            message: 'Do not do the double vote for the same picture. Please vote again.'
+        });
+    } else {
+        var firstPlace = req.body.firstPlace
+        var secondPlace = req.body.secondPlace
+        var thirdPlace = req.body.thirdPlace
 
-    forthContest[firstPlace] += 3
-    forthContest[secondPlace] += 2
-    forthContest[thirdPlace] += 1
+        forthContest[firstPlace] += 3
+        forthContest[secondPlace] += 2
+        forthContest[thirdPlace] += 1
 
-    // console.log(forthContest)
-    res.render('vote5', {
-        title: 'vote5'
-    });
+        // console.log(forthContest)
+        res.render('vote5', {
+            title: 'vote5',
+            message: ''
+        });
+    }
 
 });
 
 router.post('/vote5', function(req, res, next) {
 
-    var firstPlace = req.body.firstPlace
-    var secondPlace = req.body.secondPlace
-    var thirdPlace = req.body.thirdPlace
+    if (req.body.firstPlace == req.body.secondPlace ||
+        req.body.firstPlace == req.body.thirdPlace ||
+        req.body.secondPlace == req.body.thirdPlace) {
+        res.render('vote5', {
+            title: 'vote5',
+            message: 'Do not do the double vote for the same picture. Please vote again.'
+        });
+    } else {
+        var firstPlace = req.body.firstPlace
+        var secondPlace = req.body.secondPlace
+        var thirdPlace = req.body.thirdPlace
 
-    fifthContest[firstPlace] += 3
-    fifthContest[secondPlace] += 2
-    fifthContest[thirdPlace] += 1
+        fifthContest[firstPlace] += 3
+        fifthContest[secondPlace] += 2
+        fifthContest[thirdPlace] += 1
 
-    // console.log(fifthContest)
-    res.render('finish', {
-        title: 'finish'
-    });
+        // console.log(fifthContest)
+        res.render('finish', {
+            title: 'finish'
+        });
+    }
 });
 
 
