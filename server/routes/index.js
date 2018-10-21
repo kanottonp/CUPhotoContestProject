@@ -3,6 +3,7 @@ var router = express.Router();
 
 var find = require('../public/javascripts/findTopTenInArray')
 
+/* Initial Arrays for 60 photos, 5 contest */
 var firstContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
 var secondContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
 var thirdContest = Array.apply(null, Array(61)).map(Number.prototype.valueOf, 0);
@@ -15,6 +16,7 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Phuphu' });
 });
 
+/* GET score page. */
 router.get('/score', (req, res, next) => {
     var firstResult = find.findTopTenInArray(firstContest)
     var secondResult = find.findTopTenInArray(secondContest)
@@ -83,7 +85,7 @@ router.post('/beginvote', function(req, res, next) {
     });
 });
 
-/* POST First Contest Vote, then Render First Contest Vote Page. */
+/* POST First Contest Vote, then Render Second Contest Vote Page. */
 
 router.post('/vote1', function(req, res, next) {
 
@@ -112,6 +114,7 @@ router.post('/vote1', function(req, res, next) {
 
 });
 
+/* POST Second Contest Vote, then Render Third Contest Vote Page. */
 
 router.post('/vote2', function(req, res, next) {
 
@@ -140,6 +143,8 @@ router.post('/vote2', function(req, res, next) {
 
 });
 
+/* POST Third Contest Vote, then Render Forth Contest Vote Page. */
+
 router.post('/vote3', function(req, res, next) {
 
     if (req.body.firstPlace == req.body.secondPlace ||
@@ -166,6 +171,7 @@ router.post('/vote3', function(req, res, next) {
     }
 });
 
+/* POST Forth Contest Vote, then Render Fifth Contest Vote Page. */
 
 router.post('/vote4', function(req, res, next) {
 
@@ -193,6 +199,8 @@ router.post('/vote4', function(req, res, next) {
     }
 
 });
+
+/* POST Second Contest Vote, then Render Finish Page. */
 
 router.post('/vote5', function(req, res, next) {
 
