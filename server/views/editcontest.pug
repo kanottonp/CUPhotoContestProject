@@ -1,0 +1,99 @@
+extends layout
+
+block content
+  h1= "CU Photo Contest"
+  h2 Welcome to #{title}
+  br
+
+  form(action="/posteditcontest" method="POST")
+    a Camp title
+      |  
+      input(name='campTitle', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a Contest 1 Name
+      |  
+      input(name='firstContestName', value='')
+      br
+      br
+    a Maximum Photos for Contest 1
+      |  
+      input(type='number', name='firstContestMax', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a Contest 2 Name
+      |  
+      input(name='secondContestName', value='')
+      br
+      br
+    a Maximum Photos for Contest 2
+      |  
+      input(type='number', name='secondContestMax', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a Contest 3 Name
+      |  
+      input(name='thirdContestName', value='')
+      br
+      br
+    a Maximum Photos for Contest 3
+      |  
+      input(type='number', name='thirdContestMax', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a Contest 4 Name
+      |  
+      input(name='forthContestName', value='')
+      br
+      br
+    a Maximum Photos for Contest 4
+      |  
+      input(type='number', name='forthContestMax', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a Contest 5 Name
+      |  
+      input(name='fifthContestName', value='')
+      br
+      br
+    a Maximum Photos for Contest 5
+      |  
+      input(type='number', name='fifthContestMax', value='')
+      br
+      br
+      a -------------------------------------------------
+      br
+      br
+    a First place rate (อัตราการคิดคะแนนของลำดับที่ 1 ในการโหวต)
+      |  
+      input(type='number', name='firstPlaceRate', value='')
+      br
+      br
+    a Second place rate (อัตราการคิดคะแนนของลำดับที่ 2 ในการโหวต)
+      |  
+      input(type='number', name='secondPlaceRate', value='')
+      br
+      br
+    a Third place rate (อัตราการคิดคะแนนของลำดับที่ 3 ในการโหวต)
+      |  
+      input(type='number', name='thirdPlaceRate', value='')
+      br
+      br
+      br
+
+    button.btn.btn-primary(type='submit') Submit
