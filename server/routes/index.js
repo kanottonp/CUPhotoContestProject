@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: title });
 });
 
-router.get('/reset', function(req, res, next) {
+router.get('/resetcontest', function(req, res, next) {
     firstContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
     secondContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
     thirdContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
