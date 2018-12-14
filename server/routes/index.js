@@ -36,6 +36,17 @@ var totalVotes = 0
 router.get('/', function(req, res, next) {
     res.render('index', { title: title });
 });
+
+router.get('/reset', function(req, res, next) {
+    firstContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
+    secondContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
+    thirdContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
+    forthContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
+    fifthContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
+    totalVotes = 0
+    res.render('index', { title: title });
+});
+
 /* GET Edit Contest page. */
 router.get('/editcontest', function(req, res, next) {
     res.render('editcontest', { title: title + ' Editor' });
