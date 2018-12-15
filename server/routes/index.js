@@ -3,6 +3,9 @@ var router = express.Router();
 
 var find = require('../public/javascripts/findTopTenInArray')
 var fs = require('fs')
+var stream = fs.createWriteStream('./vote_log.txt', {
+    flags: 'a'
+});
 const { convertArrayToCSV } = require('convert-array-to-csv');
 const converter = require('convert-array-to-csv');
 
@@ -44,6 +47,10 @@ router.get('/resetcontest', function(req, res, next) {
     forthContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
     fifthContest = Array.apply(null, Array(51)).map(Number.prototype.valueOf, 0);
     totalVotes = 0
+    fs.writeFile('./vote_log.txt', '', (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+    })
     res.render('index', { title: title });
 });
 
@@ -85,6 +92,10 @@ router.get('/csv', function(req, res, next) {
 /* GET Download CSV. */
 router.get('/downloadcsv', (req, res) => {
     res.download('./CUPhotoContestResult.csv')
+})
+
+router.get('/downloadlog', (req, res) => {
+    res.download('./vote_log.txt')
 })
 
 
@@ -154,7 +165,8 @@ router.post('/beginvote', function(req, res, next) {
     totalVotes += 1
     res.render('vote1', {
         title: vote1,
-        message: ''
+        message: '',
+        id: totalVotes
     });
 });
 
@@ -243,31 +255,38 @@ router.post('/vote1', function(req, res, next) {
         req.body.secondPlace == req.body.thirdPlace) {
         res.render('vote1', {
             title: vote1,
-            message: 'Do not do the double vote for the same photos. Please vote again.'
+            message: 'Do not do the double vote for the same photos. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace <= 0 || req.body.secondPlace <= 0 || req.body.thirdPlace <= 0) {
         res.render('vote1', {
             title: vote1,
-            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace > (firstContest.length - 1) || req.body.secondPlace > (firstContest.length - 1) || req.body.thirdPlace > (firstContest.length - 1)) {
         res.render('vote1', {
             title: vote1,
-            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.',
+            id: req.body.id
         });
     } else {
         var firstPlace = req.body.firstPlace
         var secondPlace = req.body.secondPlace
         var thirdPlace = req.body.thirdPlace
+        var id = req.body.id
 
         firstContest[firstPlace] += firstPlaceRate
         firstContest[secondPlace] += secondPlaceRate
         firstContest[thirdPlace] += thirdPlaceRate
 
+        stream.write(`UserNo:${id} Contest:${vote1} 1st:${firstPlace} 2nd:${secondPlace} 3rd:${thirdPlace}\n`)
+
         // console.log(firstContest)
         res.render('vote2', {
             title: vote2,
-            message: ''
+            message: '',
+            id: id
         });
     }
 
@@ -282,31 +301,38 @@ router.post('/vote2', function(req, res, next) {
         req.body.secondPlace == req.body.thirdPlace) {
         res.render('vote2', {
             title: vote2,
-            message: 'Do not do the double vote for the same photos. Please vote again.'
+            message: 'Do not do the double vote for the same photos. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace <= 0 || req.body.secondPlace <= 0 || req.body.thirdPlace <= 0) {
         res.render('vote2', {
             title: vote2,
-            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace > (secondContest.length - 1) || req.body.secondPlace > (secondContest.length - 1) || req.body.thirdPlace > (secondContest.length - 1)) {
         res.render('vote2', {
             title: vote2,
-            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.',
+            id: req.body.id
         });
     } else {
         var firstPlace = req.body.firstPlace
         var secondPlace = req.body.secondPlace
         var thirdPlace = req.body.thirdPlace
+        var id = req.body.id
 
         secondContest[firstPlace] += firstPlaceRate
         secondContest[secondPlace] += secondPlaceRate
         secondContest[thirdPlace] += thirdPlaceRate
 
+        stream.write(`UserNo:${id} Contest:${vote2} 1st:${firstPlace} 2nd:${secondPlace} 3rd:${thirdPlace}\n`)
+
         // console.log(secondContest)
         res.render('vote3', {
             title: vote3,
-            message: ''
+            message: '',
+            id: id
         });
     }
 
@@ -321,31 +347,38 @@ router.post('/vote3', function(req, res, next) {
         req.body.secondPlace == req.body.thirdPlace) {
         res.render('vote3', {
             title: vote3,
-            message: 'Do not do the double vote for the same photos. Please vote again.'
+            message: 'Do not do the double vote for the same photos. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace <= 0 || req.body.secondPlace <= 0 || req.body.thirdPlace <= 0) {
         res.render('vote3', {
             title: vote3,
-            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace > (thirdContest.length - 1) || req.body.secondPlace > (thirdContest.length - 1) || req.body.thirdPlace > (thirdContest.length - 1)) {
         res.render('vote3', {
             title: vote3,
-            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.',
+            id: req.body.id
         });
     } else {
         var firstPlace = req.body.firstPlace
         var secondPlace = req.body.secondPlace
         var thirdPlace = req.body.thirdPlace
+        var id = req.body.id
 
         thirdContest[firstPlace] += firstPlaceRate
         thirdContest[secondPlace] += secondPlaceRate
         thirdContest[thirdPlace] += thirdPlaceRate
 
+        stream.write(`UserNo:${id} Contest:${vote3} 1st:${firstPlace} 2nd:${secondPlace} 3rd:${thirdPlace}\n`)
+
         // console.log(thirdContest)
         res.render('vote4', {
             title: vote4,
-            message: ''
+            message: '',
+            id: id
         });
     }
 });
@@ -359,31 +392,38 @@ router.post('/vote4', function(req, res, next) {
         req.body.secondPlace == req.body.thirdPlace) {
         res.render('vote4', {
             title: vote4,
-            message: 'Do not do the double vote for the same photos. Please vote again.'
+            message: 'Do not do the double vote for the same photos. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace <= 0 || req.body.secondPlace <= 0 || req.body.thirdPlace <= 0) {
         res.render('vote4', {
             title: vote4,
-            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace > (forthContest.length - 1) || req.body.secondPlace > (forthContest.length - 1) || req.body.thirdPlace > (forthContest.length - 1)) {
         res.render('vote4', {
             title: vote4,
-            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.',
+            id: req.body.id
         });
     } else {
         var firstPlace = req.body.firstPlace
         var secondPlace = req.body.secondPlace
         var thirdPlace = req.body.thirdPlace
+        var id = req.body.id
 
         forthContest[firstPlace] += firstPlaceRate
         forthContest[secondPlace] += secondPlaceRate
         forthContest[thirdPlace] += thirdPlaceRate
 
+        stream.write(`UserNo:${id} Contest:${vote4} 1st:${firstPlace} 2nd:${secondPlace} 3rd:${thirdPlace}\n`)
+
         // console.log(forthContest)
         res.render('vote5', {
             title: vote5,
-            message: ''
+            message: '',
+            id: id
         });
     }
 
@@ -398,26 +438,32 @@ router.post('/vote5', function(req, res, next) {
         req.body.secondPlace == req.body.thirdPlace) {
         res.render('vote5', {
             title: vote5,
-            message: 'Do not do the double vote for the same photos. Please vote again.'
+            message: 'Do not do the double vote for the same photos. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace <= 0 || req.body.secondPlace <= 0 || req.body.thirdPlace <= 0) {
         res.render('vote5', {
             title: vote5,
-            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is below than 1. Please vote again.',
+            id: req.body.id
         });
     } else if (req.body.firstPlace > (fifthContest.length - 1) || req.body.secondPlace > (fifthContest.length - 1) || req.body.thirdPlace > (fifthContest.length - 1)) {
         res.render('vote5', {
             title: vote5,
-            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.'
+            message: 'Do not do the vote for the photo that photo number is higher than the limit. Please vote again.',
+            id: req.body.id
         });
     } else {
         var firstPlace = req.body.firstPlace
         var secondPlace = req.body.secondPlace
         var thirdPlace = req.body.thirdPlace
+        var id = req.body.id
 
         fifthContest[firstPlace] += firstPlaceRate
         fifthContest[secondPlace] += secondPlaceRate
         fifthContest[thirdPlace] += thirdPlaceRate
+
+        stream.write(`UserNo:${id} Contest:${vote5} 1st:${firstPlace} 2nd:${secondPlace} 3rd:${thirdPlace}\n`)
 
         // console.log(fifthContest)
         res.render('finish', {
